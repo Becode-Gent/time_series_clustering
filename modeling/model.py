@@ -1,4 +1,6 @@
 from sklearn.cluster import KMeans
+from sklearn.cluster import DBSCAN
+
 
 def kmeans(data,n):
     """train a model
@@ -14,7 +16,7 @@ def kmeans(data,n):
 def db_scan(data,n):
     """train
     """
-    model = KMeans(n_clusters=n)
+    
+    model = DBSCAN(eps = 0.5, min_samples = 10).fit(data)
 
-    model.fit(data)
     return model
