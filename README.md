@@ -9,7 +9,7 @@ Analyzed multiple measurements data of a device. Created clustering models to la
 7 features wich accelerator X, Y, Z and gyroscope X,Y, Z and the difference between alpha and beta angels.
 
 
-# Clustering Models used-
+## Clustering Models used-
 
 filter
 
@@ -25,26 +25,26 @@ DBSCAN algorithm
 
 
 
-# Skills and Tools
+## Skills and Tools
 
 Exploratory Data Analysis on Time Series Data, filter Smoothing Models, PCA, SAX, K_means Models, ruptures Models
 
-# Results
+## Results
 
 defining 5 classes of workers movements and define them depending on labeled data haded from the company (wandelen, buiging, staan, armen_hoog, kalibratie)
  
 [! image](link ) labeled classes
 
-# License
+## License
 
 Free license
 
-# Github link:
+## Github link:
 
 https://github.com/SpineWiseTeam4/ML_Project
 
 
-# Contributers:
+## Contributers:
 
 Amanuel Zeredawit: junior ML engineer at Becode
 
@@ -58,7 +58,7 @@ Sam Fooks: junior ML engineer at Becode
 
 https://github.com/samuelfooks
 
-# Acknowledgments
+## Acknowledgments
 
 BeCode Arai4 AI coaches(Chrysanthi and Louis)
 
