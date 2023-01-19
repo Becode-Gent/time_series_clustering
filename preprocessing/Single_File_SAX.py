@@ -17,17 +17,11 @@ from tslearn.piecewise import PiecewiseAggregateApproximation
 from tslearn.piecewise import SymbolicAggregateApproximation, \
     OneD_SymbolicAggregateApproximation
 
-# labelled_data = '/home/sammich/Documents/BeCode/becode_projects/ML_Project/data/labelled_movement_scription'
-# filename1 = '/IVH1-HS1-COMBINED-201-1-1-6-47-25-1671121115-v1.4.2+lucina-buzz.csv'
-# #'TP1-NC1-COMBINED-201-1-1-6-53-36-1668684025-v1.4.3+lucina-buzz.csv'
-# data_file1 = labelled_data + '/'+ filename1
 
 def single_df_SAX(single_df,features, n_symbols = 8, n_segments=100, *proportion_segments):
    
-    #df = pd.read_csv(single_df)
     X = single_df
     X = X[features]
-    #scale the data
     std_slc = StandardScaler()
     X = std_slc.fit_transform(X)
 

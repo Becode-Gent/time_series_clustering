@@ -9,6 +9,7 @@ def determine_n_clusters(data, features):
     from sklearn.metrics import silhouette_score
 
     sil = []  
+    threshold = 0.7
    # dissimilarity would not be defined for a single cluster, thus, minimum number of clusters should be 2
     for k in range(2, k_max+1):
         kmeans = KMeans(n_clusters = k).fit(data[features])
