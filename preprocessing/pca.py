@@ -10,13 +10,20 @@ def determine_n_clusters(data, features):
 
     sil = []  
     threshold = 0.7
+
    # dissimilarity would not be defined for a single cluster, thus, minimum number of clusters should be 2
     for k in range(2, k_max+1):
         kmeans = KMeans(n_clusters = k).fit(data[features])
         labels = kmeans.labels_
         sil.append(silhouette_score(data[features], labels, metric = 'euclidean'))
 
-    return sil
+    k_values= [*range(2, len(sil)+2)]
+    print(k_values)
+    print(sil)
+    zipped = list(zip(k_values, sil))
+    df =  pd.DataFrame(zipped, columns= ['k','Silhouette Score'])
+
+    return df
 
 
 def apply_pca(data,features,n):
