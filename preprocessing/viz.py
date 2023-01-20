@@ -9,9 +9,9 @@ def viz_data(data,features,title):
     
 
 
-def viz_output(data,color,title):
+def viz_output(data, color,title,y):
 
-    fig = px.scatter(data, x='ts_n', y='acc_x_n', color=color)
+    fig = px.scatter(data, x='ts_n', y= y, color=color)
     fig.update_layout(title_text=title, title_x=0.5)
     fig.show()
 
@@ -21,4 +21,9 @@ def viz_bar(data,title):
     fig = px.bar(data.groupby(['label', 'cluster']).size().unstack(level=1))
     fig.update_layout(title_text=title, title_x=0.5)
     fig.show()
+
+def viz_score(data, title):
+    plt.figure(1)
+    data.plot(kind='line',x='k',y= 'Silhouette Score',title = title)
+    plt.show()
     
