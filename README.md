@@ -13,7 +13,7 @@ Analyzed multiple measurements data of a device. Created clustering models to la
 
 filter
 
-Symbolic Aggression
+Symbolic Aggregession
 
 principle component analysis
 
