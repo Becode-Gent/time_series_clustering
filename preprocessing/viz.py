@@ -18,7 +18,7 @@ def viz_output(data, color,title,y):
 
 def viz_bar(data,title):
     
-    fig = px.bar(data.groupby(['label', 'cluster']).size().unstack(level=1))
+    fig = px.bar(data.groupby(['label', 'cluster']).size().unstack(level=1),width=600, height=400)
     fig.update_layout(title_text=title, title_x=0.5)
     fig.show()
 

@@ -1,6 +1,8 @@
 from sklearn.decomposition import PCA
 import pandas as pd
 from sklearn.cluster import KMeans
+import streamlit as st
+import time
 
 
 def determine_n_clusters(data, features):
@@ -12,14 +14,17 @@ def determine_n_clusters(data, features):
     threshold = 0.7
 
    # dissimilarity would not be defined for a single cluster, thus, minimum number of clusters should be 2
+    my_bar = st.progress(0)
     for k in range(2, k_max+1):
         kmeans = KMeans(n_clusters = k).fit(data[features])
         labels = kmeans.labels_
         sil.append(silhouette_score(data[features], labels, metric = 'euclidean'))
+        my_bar.progress(k+ 50)
+       
+        #st.write("k now:", k)
 
     k_values= [*range(2, len(sil)+2)]
-    print(k_values)
-    print(sil)
+    
     zipped = list(zip(k_values, sil))
     df =  pd.DataFrame(zipped, columns= ['k','Silhouette Score'])
 

@@ -13,7 +13,7 @@ def kmeans(data,n):
     return model
 
 
-def db_scan(data,n):
+def db_scan(data,n=5):
     """train
     """
     
