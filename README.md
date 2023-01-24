@@ -7,6 +7,7 @@ In this project, we tried to implement a pipeline to cluster multivariant time s
 ![sensor image](images/logo.png)
 
 
+
 ## Pipeline of the project
 
 
@@ -14,9 +15,12 @@ The effectiveness of the methods used in the pipeline was that they are enabling
 These methods are first tried on the labeled data provided by the client. And they were then further used on unlabelled movement data in attempts to cluster unlabeled data into distinct movements.  
 
 Our pipeline works in a more modular manner, to give freedom to the user to choose the features they would like to examine, preprocessing steps that the 
-data has to go through, and the model for clustering. Given the size, and variety of the data inputs, we found that this modularity was key for better and more distinctive clustering. Function modeling/main.py contains the pipeline.  It takes in input from the user as well as a '.csv' file, the input from the user determines which features, preprocessing step, and clustering to be used.
+data has to go through, and the model for clustering. Given the size, and variety of the data inputs, we found that this modularity was key for better and more distinctive clustering. The file modeling/main.py contains the pipeline.  
 
-We also take the scope of the project higher, so that it can classify the labeled data. A module for Analysing and visualizing the data is also integrated into our solution.
+We also take the scope of the project higher, so that it can classify the labeled data. A module for analyzing and visualizing the data is also integrated also proposed in this pipeline.
+
+
+
 
 ![pipeline image](images/pipe.png)
 
@@ -70,6 +74,8 @@ pip install -r requirements.txt
 streamlit run app.py
 
 ```
+
+
 
 
 ![pipeline image](images/output.png)
