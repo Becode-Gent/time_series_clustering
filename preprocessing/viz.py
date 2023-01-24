@@ -23,6 +23,7 @@ def viz_bar(data,title):
     fig.show()
 
 def viz_score(data, title):
+    
     plt.figure(1)
     data.plot(kind='line',x='k',y= 'Silhouette Score',title = title)
     plt.show()

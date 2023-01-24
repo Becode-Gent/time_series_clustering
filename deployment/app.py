@@ -33,8 +33,6 @@ from filter import apply_hilbert_filter
 from filter import apply_haar_filter
 from pca import apply_pca
 from pca import determine_n_clusters
-#from segmentation import apply_segemntation
-from sax import apply_symbolic_aggregation
 # from viz import viz_data
 # from viz import viz_output
 # from viz import viz_bar
@@ -44,12 +42,12 @@ from model import kmeans
 from model import db_scan
 from Single_File_SAX import single_df_SAX  
 from get_path import get_file_name
+
 warnings.filterwarnings('ignore')
-
-
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 def main():
+
     global data
     global data_copy
     global number_cluster
@@ -59,14 +57,13 @@ def main():
     state = True
 
     st.title("👷🏼‍♀️  SPINEWISE 🧑🏾‍💻")
-    menu = ['Home','Streamlit', 'Project','Analysis','Cluster model', 'Classification model']
+    menu = ['Home','Analysis','Cluster model', 'Classification model']
     choice = st.sidebar.selectbox("Menu", menu)
 
     def viz_data(data,features,title):
         fig_0 = px.scatter(data, x ='ts_n', y=features, title=title)
         st.plotly_chart(fig_0, theme="streamlit", use_container_width=True)
         
-
     def viz_k(data,title):
         fig_1 = px.line(data, x='k', y='Silhouette Score',title=title)
         st.plotly_chart(fig_1, theme="streamlit", use_container_width=True)
@@ -76,7 +73,6 @@ def main():
         fig_2.update_layout(title_text=title, title_x=0.5)
         st.plotly_chart(fig_2, theme="streamlit", use_container_width=True)
         
-
     def viz_bar(data,title):
         fig_3 = px.bar(data.groupby(['label', 'cluster']).size().unstack(level=1),width=600, height=400)
         fig_3.update_layout(title_text=title, title_x=0.5)
@@ -96,7 +92,6 @@ def main():
 
             elif preprocess == "sax":
                 data, features = single_df_SAX(data, features)
-                #st.write("I was in sax")
                 print("+++++++++ symbolic aggregation applied ++++++++")
                 viz_output(data,'SAX_vector','Output of SAX', y_label)
                 st.write(data.head(2))
@@ -112,32 +107,22 @@ def main():
         return data, features
 
 
-
-    if choice == 'Home':
-        image = Image.open("logo.png")
-        st.image(image, caption="SpineWise Belgium")
-        st.sidebar.image(image)
-
-    elif choice == 'Cluster model':
-        #st.subheader("Cluster model")
+    if choice == 'Cluster model':
         file_type = st.sidebar.radio("File type", ("labeled","unlabeled"))
         file_name = st.sidebar.selectbox("File name", set(get_file_name(file_type)))
-        
         data = load_file(file_name, file_type)
         col =data.columns.values.tolist()
         print("file name:", file_name)
         print("+++++++++++++++ data loaded +++++++++++++++++")
         print(f"size of data: {data.shape}")
-
         features = st.sidebar.multiselect("select features(X)", set(col))
         y_label = st.sidebar.selectbox("y_label",set(features))
         preprocesses = st.sidebar.multiselect("Preprocessing steps", ('filter','pca','sax'))
+
         if 'pca' in preprocesses:
             n_components = st.sidebar.number_input("n_components(pca)", 1, len(features)-1, step=1, key='n_components')
+
         model = st.sidebar.selectbox("Model", ('DBSCAN', 'Kmeans'))
-        
-
-
         if len(features) > 0:
             features_copy = features.copy()
             features_copy.append('ts_n')
@@ -152,8 +137,6 @@ def main():
         
         if model == 'Kmeans':
             number_cluster = st.sidebar.number_input("K values", 2, 12, step=1, key='number_clusters')
-
-        
 
         if st.sidebar.button("Cluster ⏸", key='cluster'):
             if len(features) > 0:
@@ -183,16 +166,14 @@ def main():
 
 
 
-    ##############################################################################            
+    ##############################################################################  
+              
                             
     elif choice == 'Classification model':
         global class_names
-
         st.subheader("Classification model")  
         st.sidebar.subheader("Load files")
         uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
-
-        
         
         def plot_metrics(metrics_list):
             if 'Confusion Matrix' in metrics_list:
@@ -227,14 +208,9 @@ def main():
             return x_train, x_test, y_train, y_test
                             
 
-
-
-            
-
         if uploaded_file is not None:
             data = pd.read_csv(uploaded_file)
             col =data.columns.values.tolist()
-            #st.write(col)
             class_features = list(st.sidebar.multiselect("Features(X)", set(col)))
             class_features_copy = class_features.copy()
             target = st.sidebar.selectbox("Target(y)", set(col), key='target')
@@ -242,10 +218,8 @@ def main():
             st.write("target",target)
             if len(target)> 0:
                  class_names =data[target].unique().tolist()
-
                  st.write("class_names", class_names)
                  st.write("shape of data : ",data.shape)
-                 #st.write("columns : ", data.columns)
                  st.sidebar.subheader("Preprocesses")
                  class_preprocesses =  st.sidebar.multiselect("Basic preprocesses", ("standard scaling","label encoding","split"), key='class_preprocesses')
                  st.write('class_preprocesses', class_preprocesses)
@@ -259,19 +233,15 @@ def main():
                         data = data[class_features]
                         st.write(data.head())
                         x_train, x_test, y_train, y_test = start_class_preprocessing(data, class_preprocesses, class_features_copy, target) 
-    
-        
 
         st.sidebar.subheader("Choose Classifier")
         classifier = st.sidebar.selectbox("Classifier", ("Support Vector Machine (SVM)", "Logistic Regression", "Random Forest"))
 
         if classifier == 'Support Vector Machine (SVM)':
             st.sidebar.subheader("Model Hyperparameters")
-            #choose parameters
             C = st.sidebar.number_input("C (Regularization parameter)", 0.01, 10.0, step=0.01, key='C_SVM')
             kernel = st.sidebar.radio("Kernel", ("rbf", "linear"), key='kernel')
             gamma = st.sidebar.radio("Gamma (Kernel Coefficient)", ("scale", "auto"), key='gamma')
-
             metrics = st.sidebar.multiselect("What metrics to plot?", ('Confusion Matrix', 'ROC Curve', 'Precision-Recall Curve'))
             
             if st.sidebar.button("Classify", key='classify'):
@@ -287,6 +257,7 @@ def main():
 
 
         #*************************************************#
+
         if classifier == 'Logistic Regression':
             st.sidebar.subheader("Model Hyperparameters")
             C = st.sidebar.number_input("C (Regularization parameter)", 0.01, 10.0, step=0.01, key='C_LR')
@@ -320,74 +291,52 @@ def main():
                 model.fit(x_train, y_train)
                 accuracy = model.score(x_test, y_test)
                 y_pred = model.predict(x_test)
-                #st.write("Accuracy: ", accuracy.round(2))
-                #st.write("Precision: ", precision_score(y_test, y_pred, labels=class_names).round(2))
-                #st.write("Recall: ", recall_score(y_test, y_pred, labels=class_names).round(2))
+                st.write("Accuracy: ", accuracy.round(2))
+                st.write("Precision: ", precision_score(y_test, y_pred, labels=class_names).round(2))
+                st.write("Recall: ", recall_score(y_test, y_pred, labels=class_names).round(2))
                 plot_metrics(metrics)
 
-    elif choice == 'Streamlit':
-        #st.subheader("What is Streamlit")
-        st.image('st_logo.jpg')
-        if st.sidebar.button("What is streamlit?", key='w_st'):
-            st.write("* WHAT IS STREAMLIT")
-            st.write('  Streamlit is a free and open-source framework to rapidly build and share beautiful machine learning and data science web apps.  ')
-        if st.sidebar.button("What makes it handy?", key= 'w_us'):
-            st.write(" ")
-            st.write("* WHAT MAKES HANDY")
-            st.write("  No front-end (html, js, css) experience or knowledge is required.")
-            st.write("  You don't need to spend days or months to create a web app ")
-            st.write("  It is compatible with the majority of Python libraries ")
-            st.write("  Less code is needed to create amazing web apps")
-            st.write("  Data caching simplifies and speeds up computation pipelines")
-        if st.sidebar.button("How to use?", key='st_h'):
-            st.write("* HOW TO USE")
-            st.write("  pip install streamlit")
-            st.write("  import streamlit as st")
-            st.write("  streamlit run app.py ")
-
-    elif choice == 'Project':
+    elif choice == 'Home':
         st.subheader("Pipeline of the project")
-        st.write(" ")
         st.image('pipe.png')
+        st.sidebar.image('logo.png')
+
     elif choice == 'Analysis':
         st.sidebar.subheader("Load files")
-        
         uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
+
         if uploaded_file:
             data_analysis = pd.read_csv(uploaded_file)
-        #co =data.columns.values.tolist()
             st.write(data_analysis.head())
-            if st.sidebar.button("show summary",key='a_sw'):
+
+            if st.sidebar.button("show summary",key='a_sw'): # todo, add more summary
                 st.write('Columns :', data_analysis.columns)
                 st.write('Shape   :', data_analysis.shape)
 
             st.sidebar.subheader("Preprocesses")
-
             if data_analysis.isnull().values.any():
-                #st.warning('There are NaN values', icon="⚠️")
-                st.write("warning there is NaN values you need to handle")
-                #st.sidebar.write("How you want to handle nan?")
+                st.warning('There are NaN values', icon="⚠️") 
                 null_methods = st.sidebar.selectbox("What to do with NaN?", ('drop', 'fill forward' , 'fill backward'))
+
                 if len(null_methods)>0:
-                    if st.sidebar.button("handle",key='handle_st'):
-                        if null_methods == 'drop':
+                    if st.sidebar.button("handle",key='handle_st'): # todo, add methods for 'fill forwar' and others
+                        if null_methods == 'drop':   
                             data_analysis = data_analysis.dropna()
                             st.write("New dataframe with handled nans")
                             st.write(data_analysis.head())
-
-                
-            preprocessing_steps = st.sidebar.multiselect("basic preprocessing", ('standard scaling', 'label encoding' , 'remove outlier'))
-            if len(preprocessing_steps)> 0:
+ 
+            preprocessing_steps = st.sidebar.multiselect("basic preprocessing", ('standard scaling', 'label encoding' , 'remove outlier')) 
+            if len(preprocessing_steps)> 0:                      # todo, methods for preprocessing
                 if st.sidebar.button("apply", key='an_ap'):
-                    st.write("preprocessing complete you can visualize now")
+                    st.write("******* preprocessing started ********")
+
             st.sidebar.subheader("Visualization")
             x_analysis = st.sidebar.multiselect("select  x", set(data_analysis.columns.values.tolist()))
             y_analysis = st.sidebar.multiselect("select  y", set(data_analysis.columns.values.tolist()))
 
-            if st.sidebar.button("Visualize", key='bt_vis'):
-                st.write("visualization started")
+            if st.sidebar.button("Visualize", key='bt_vis'): # todo, methods for visualization
+                st.write("***** visualization started ******")
 
-    
 
 
 if __name__ == '__main__':
