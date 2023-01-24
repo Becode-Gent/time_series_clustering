@@ -35,7 +35,7 @@ our solution.
 
 * Principal Component Analysis(PCA) from sklearn
 
-####Clustering Methods:
+#### Clustering Methods:
 
 * K_means
 
@@ -70,9 +70,9 @@ pip install -r requirements.txt
 
 ## Contributors:
 
-[Amanuel Zeredawit: junior ML engineer at Becode](https://en.wikipedia.org/wiki/ArcelorMittal)
-[Maysa AbuSharekh: junior ML engineer at Becode](https://github.com/maysahassan)
-[Sam Fooks: junior ML engineer at Becode](https://github.com/samuelfooks)
+* [Amanuel Zeredawit: junior ML engineer at Becode](https://en.wikipedia.org/wiki/ArcelorMittal)
+* [Maysa AbuSharekh: junior ML engineer at Becode](https://github.com/maysahassan)
+* [Sam Fooks: junior ML engineer at Becode](https://github.com/samuelfooks)
 
 
 ## Acknowledgments
