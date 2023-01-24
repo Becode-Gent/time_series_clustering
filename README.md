@@ -66,6 +66,11 @@ virtualenv venv
 pip install -r requirements.txt
 
 ```
+4. Run app.py
+```bash
+streamlit run app.py
+
+```
 
 
 ![pipeline image](images/output.png)
