@@ -70,7 +70,7 @@ pip install -r requirements.txt
 
 ## Contributors:
 
-* [Amanuel Zeredawit: junior ML engineer at Becode](https://en.wikipedia.org/wiki/ArcelorMittal)
+* [Amanuel Zeredawit: junior ML engineer at Becode](https://github.com/AmanuelZeredawit)
 * [Maysa AbuSharekh: junior ML engineer at Becode](https://github.com/maysahassan)
 * [Sam Fooks: junior ML engineer at Becode](https://github.com/samuelfooks)
 
