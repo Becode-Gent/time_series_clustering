@@ -1,81 +1,86 @@
 # ML_Project (SPINEWISE)
 
-Multivariant Time Series clustering
+## General Description of the project
+In this project, we tried to implement a pipeline to cluster multivariant time series data of human movements detected by sensors worn behind the neck (_n) and on a belt (_r). The accelerometer and gyroscope integrated into the device provide insights on movements in the x,y,z plains.
+![sensor image](images/logo.png)
 
-Built a model to try to cluster human movements detected by sensors worn behind the neck (_n) and on a belt (_r)
 
-The pipeline uses a few different methods to filter the input data from an accelerometer, gyroscope, magnetometer, and a calculation device.  
+## Pipeline of the project
 
-The accelerometer gyroscope provide insights on movements in the x,y,z plains.
+The pipeline uses a few different methods to filter the input data from an accelerometer, gyroscope, magnetometer, and calculation device.  
+![pipeline image](images/pipe.png)
 
-The effectiveness of the methods used in the pipeline were tested using labelled movement data provided from the client.
-Using mostly the data from the accelerometer, gyroscope, and output from the calculation device on the belt.  
 
-These methods were then further used on unlabelled movement data in attempts to cluster unlablled data into distinct movements.  
+
+The effectiveness of the methods used in the pipeline was that they are enabling the use of different features and preprocessing steps on the data provided by the client. 
+These methods are first tried on the labeled data provided by the client. And they were then further used on unlabelled movement data in attempts to cluster unlabeled data into distinct movements.  
 
 Our pipeline works in a more modular manner, to give freedom to the user to choose the features they would like to examine, preprocessing filters
 they find give the most clarity in the data before clustering, and the option to use our clustering methods or insert other clustering methods in 
-our clustering file. 
+our clustering file. Given the size, and variety of the data inputs, we found that this modularity was key for better and more distinctive clustering.
+Function modeling/main.py contains the pipeline.  It takes in input from the user as well as a '.csv' file, the input from the user determines which features, filtering, and clustering to be used.
 
-Given the size, and variety of the data inputs, we found that this modularity was key for better and more distinctive clustering.
+we also take the scope of the project higher, so that it can classify the labeled data. A module for Analysing and visualizing the data is also integrated into
+our solution.
 
 
-Data Preprocessing:
 
-Hillbert Filter from sklearn
+#### Data Preprocessing libraries used:
 
-Haar filter from Pytw
+* Hillbert Filter from sklearn
 
-Symbolic Aggregession(SAX) from Tslearn
+* Haar filter from Pytw
 
-Principal Component Analysis(PCA) from sklearn
+* Symbolic Aggregession(SAX) from Tslearn
 
-Clustering Methods:
+* Principal Component Analysis(PCA) from sklearn
 
-K_means
+####Clustering Methods:
 
-DBSCAN
+* K_means
 
-Results can be plotted after each cluster method
+* DBSCAN
 
-Function main.py contains the pipeline.  It takes in input from the user as well as a '.csv' file, the input from the user determines which filtering, clustering
+## Deployment 
+The application is deployed with streamlet locally. 
+![pipeline image](images/output.png)
 
-## Skills and Tools
+1. Install virtualenv
 
-## Results
+```bash
+pip install virtualenv
+```
+2. Create a virtual environment and activate it
+```bash
+virtualenv venv
+> On windows -> venv\Scripts\activate
+> On Linux -> . env/bin/activate
 
-First we were able to associate one or 2 clusters with the labels from the labelled data, depending on the chosen input features.
+```
+3. Install the necessary libraries
+```bash
+pip install -r requirements.txt
 
-After this, we ran our methods on unlabelled data to try and find new clusters of movements.  
+```
 
-[! image](link ) labeled classes
-
-## License
-
-Free license
 
 ## Github link:
 
-https://github.com/SpineWiseTeam4/ML_Project
+[github link](https://github.com/SpineWiseTeam4/ML_Project)
 
+## Contributors:
 
-## Contributers:
+[Amanuel Zeredawit: junior ML engineer at Becode](https://en.wikipedia.org/wiki/ArcelorMittal)
+[Maysa AbuSharekh: junior ML engineer at Becode](https://github.com/maysahassan)
+[Sam Fooks: junior ML engineer at Becode](https://github.com/samuelfooks)
 
-Amanuel Zeredawit: junior ML engineer at Becode
-
-https://github.com/AmanuelZeredawit
-
-Maysa AbuSharekh: junior ML engineer at Becode
-
-https://github.com/maysahassan
-
-Sam Fooks: junior ML engineer at Becode
-
-https://github.com/samuelfooks
 
 ## Acknowledgments
-
 BeCode Arai4 AI coaches(Chrysanthi and Louis)
+SpineWise developing teams
+
+© 2022 Becode, Ghent.
+
 
 
 
