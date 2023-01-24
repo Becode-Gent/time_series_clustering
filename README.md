@@ -42,7 +42,7 @@ our solution.
 * DBSCAN
 
 ## Deployment 
-The application is deployed with streamlet locally. 
+The application is deployed with streamlit locally. 
 ![pipeline image](images/output.png)
 
 1. Install virtualenv
@@ -76,8 +76,8 @@ pip install -r requirements.txt
 
 
 ## Acknowledgments
-BeCode Arai4 AI coaches(Chrysanthi and Louis)
-SpineWise developing teams
+* BeCode Arai4 AI coaches(Chrysanthi and Louis)
+* SpineWise developing teams
 
 © 2022 Becode, Ghent.
 
