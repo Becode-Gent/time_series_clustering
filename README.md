@@ -1,6 +1,6 @@
-# Clustering of movements
+# Multivariant time series clustering
 
-## General Description of the project
+
 
 In this project, we tried to implement a pipeline to cluster multivariant time series data of human movements detected by sensors worn behind the neck (\_n) and on a belt (\_r). The accelerometer and gyroscope integrated into the device provide insights on movements in the x,y,z plains.
 
