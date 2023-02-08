@@ -1,4 +1,4 @@
-# ML_Project (UNCLASSIFIED IMU CLUSTERING)
+# Clustering of movements
 
 ## General Description of the project
 
