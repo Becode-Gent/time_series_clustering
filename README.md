@@ -1,3 +1,4 @@
+
 # ML_Project (UNCLASSIFIED IMU CLUSTERING)
 
 ## General Description of the project
@@ -79,3 +80,4 @@ streamlit run deployment/app.py
 - BeCode Arai4 AI coaches(Chrysanthi and Louis)
 
 © 2023 Becode, Ghent.
+
