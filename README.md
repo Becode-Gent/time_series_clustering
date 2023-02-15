@@ -1,5 +1,5 @@
 
-# ML_Project (UNCLASSIFIED IMU CLUSTERING)
+# Multivariant time series clustering
 
 ## General Description of the project
 
